@@ -38,6 +38,6 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-add_executable(cxx_notes general_notes.cc tbb_notes.cc)
+add_executable(cxx_notes general_notes.cc tbb_notes.cc ieee754_notes.cc)
 set_property(TARGET cxx_notes PROPERTY CXX_STANDARD 17)
 target_link_libraries(cxx_notes gtest_main TBB::tbb TBB::tbbmalloc Boost::headers gmp)

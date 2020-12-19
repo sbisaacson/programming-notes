@@ -80,6 +80,7 @@ class Horner {
 
     uint64_t get_sum() const { return sum_; }
 
+    // operator used for scan
     template <typename Tag>
     void operator()(const tbb::blocked_range<size_t> &range, Tag) {
         for (size_t i = range.begin(); i < range.end(); ++i) {
@@ -92,9 +93,24 @@ class Horner {
         num_terms_ += range.size();
     }
 
+    // operator used for reduce
+    void operator()(const tbb::blocked_range<size_t> &range) {
+        for (size_t i = range.begin(); i < range.end(); ++i) {
+            sum_ = (multiplier_ * sum_) + data_[i];
+        }
+        num_terms_ += range.size();
+    }
+
+    // operator used for scan
     void reverse_join(Horner &left) {
         sum_ = exponentiate(multiplier_, num_terms_) * left.sum_ + sum_;
         num_terms_ += left.num_terms_;
+    }
+
+    // operator used for reduce
+    void join(Horner &right) {
+        sum_ = exponentiate(multiplier_, right.num_terms_) * sum_ + right.sum_;
+        num_terms_ += right.num_terms_;
     }
 
     void assign(Horner &other) {
@@ -121,7 +137,7 @@ class Horner {
     uint64_t *data_;
 };
 
-TEST(TBBNotes, ParallelPolynomialEvaluate) {
+TEST(TBBNotes, ParallelPolynomialScanEvaluate) {
     const size_t NUM_ELEMENTS = 65536;
     const uint64_t MULTIPLIER = 3;
     std::vector<uint64_t> data(NUM_ELEMENTS);
@@ -138,6 +154,24 @@ TEST(TBBNotes, ParallelPolynomialEvaluate) {
 
     for (size_t i = 0; i < NUM_ELEMENTS; ++i)
         ASSERT_EQ(expected_result[i], data[i]) << "Mismatch in index " << i;
+}
+
+TEST(TBBNotes, ParallelPolynomialEvaluate) {
+    const size_t NUM_ELEMENTS = 65536;
+    const uint64_t MULTIPLIER = 3;
+    std::vector<uint64_t> data(NUM_ELEMENTS);
+    std::vector<uint64_t> expected_result(NUM_ELEMENTS);
+    std::iota(data.begin(), data.end(), 0);
+    uint64_t running_sum = 0;
+    for (size_t i = 0; i < NUM_ELEMENTS; ++i) {
+        running_sum = MULTIPLIER * running_sum + data[i];
+        expected_result[i] = running_sum;
+    }
+    Horner worker(MULTIPLIER, data.data());
+    tbb::parallel_reduce(tbb::blocked_range<size_t>(0, NUM_ELEMENTS, 1024),
+                         worker);
+
+    ASSERT_EQ(running_sum, worker.get_sum());
 }
 
 // Use of a concurrent vector within a `parallel_for` to store
