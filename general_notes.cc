@@ -1,6 +1,7 @@
 // Miscellaneous notes on C++.
 
 #include <cinttypes>
+#include <functional>
 #include <memory>
 #include <new>
 #include <ostream>
@@ -114,6 +115,22 @@ TEST(TypeErasure, Example) {
     std::ostringstream buf;
     std::for_each(vec.begin(), vec.end(), [&](auto &it) { it.display(buf); });
     ASSERT_EQ("5 hello", buf.str());
+}
+
+// C++ lambdas allow closures to move values into a closure; to mutate
+// them across calls, the mutable keyword is required:
+std::function<int()> make_counter() {
+    int count = 0;
+    return [=]() mutable { return count++; };
+}
+
+TEST(Closures, Mutable) {
+    auto c0 = make_counter();
+    auto c1 = make_counter();
+    for (int i = 0; i < 10; ++i) {
+        ASSERT_EQ(i, c0());
+        ASSERT_EQ(i, c1());
+    }
 }
 
 } // namespace
