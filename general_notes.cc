@@ -6,6 +6,7 @@
 #include <new>
 #include <ostream>
 #include <sstream>
+#include <string>
 #include <vector>
 
 #include "gtest/gtest.h"
@@ -111,7 +112,7 @@ class DisplayOwned {
 TEST(TypeErasure, Example) {
     std::vector<DisplayOwned> vec;
     vec.emplace(vec.end(), 5);
-    vec.emplace(vec.end(), " hello");
+    vec.emplace(vec.end(), std::string(" hello"));
     std::ostringstream buf;
     std::for_each(vec.begin(), vec.end(), [&](auto &it) { it.display(buf); });
     ASSERT_EQ("5 hello", buf.str());
