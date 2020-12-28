@@ -31,8 +31,8 @@ format for `serde`.
 
 [`backtrace`](https://crates.io/crates/backtrace) is analogous to
 `backtrace(7)` in GLIBC and allows you to obtain a backtrace at
-runtime. It's useful for errors. Otherwise, (by the time the error
-bubbles up the callchain, you may lose the backtrace.
+runtime. It's useful for errors. Otherwise, by the time the error
+bubbles up the callchain, you will lose the backtrace.
 
 ### `snafu`
 
