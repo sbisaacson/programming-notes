@@ -1,5 +1,43 @@
 # Bookmarks on crates
 
+## Data structures and general programming
+
+### `hashbrown`
+
+[`hashbrown`](https://crates.io/crates/hashbrown) is a
+high-performance hash table.
+
+### `regex`
+
+[`regex`](https://crates.io/crates/regex) is the standard regular
+expression engine.
+
+### `lazy_static`
+
+[`lazy_static`](https://crates.io/crates/lazy_static) allows you to
+initialize static variables at run-time.
+
+## Parallel programming
+
+### `rayon`
+
+[`rayon`](https://crates.io/crates/rayon) is a parallel programming
+framework akin to TBB. (The `par_chunks()` method gives an interface
+similar to `tbb::parallel_for` with an explicit grain size).
+
+### `crossbeam`
+
+[`crossbeam`](https://crates.io/crates/crossbeam) implements channels,
+scoped threads, and other utilities for multicore programming. The
+channels in crossbeam are more feature-rich than the ones in the
+standard library.
+
+### `parking_lot`
+
+[`parking_lot`](https://crates.io/crates/parking_lot) implements
+versions of `Mutex`, `RwLock`, `Condvar`, and `Once` that are faster
+than the standard library.
+
 ## Serialization
 
 ### `serde`
@@ -25,14 +63,21 @@ format for `serde`.
 
 [`rug`](https://crates.io/crates/rug) is a GMP wrapper.
 
+### `num-complex`
+
+[`num-complex`](https://crates.io/crates/num-complex) is the standard
+implementation of complex numbers.
+
 ## Error handling
 
 ### `backtrace`
 
 [`backtrace`](https://crates.io/crates/backtrace) is analogous to
 `backtrace(7)` in GLIBC and allows you to obtain a backtrace at
-runtime. It's useful for errors. Otherwise, by the time the error
-bubbles up the callchain, you will lose the backtrace.
+runtime. It's useful for error reporting: include a
+`backtrace::Backtrace` in the error arm of a `Result`. Otherwise, by
+the time the error bubbles up the callchain, you will lose the
+backtrace.
 
 ### `snafu`
 
@@ -54,7 +99,26 @@ some macros.
 [`quickcheck`](https://crates.io/crates/quickcheck) allows
 `hypothesis`-style tests.
 
+## Logging
+
+### `log`
+
+[`log`](https://crates.io/crates/log) is the standard logging
+crate. Executables also need a logger implementation;
+[`env_logger`](https://crates.io/crates/env_logger) is what I usually
+use.
+
+### `slog`
+
+[`slog`](https://crates.io/crates/slog) provides structure logging,
+which should eventually be added to `log`.
+
 ## FFI
+
+### `bindgen`
+
+[`bindgen`](https://crates.io/crates/bindgen) generates Rust bindings
+for C (and a restricted subset of C++) headers.
 
 ### `rlua`
 
