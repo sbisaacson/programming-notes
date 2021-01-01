@@ -53,3 +53,16 @@ some macros.
 
 [`quickcheck`](https://crates.io/crates/quickcheck) allows
 `hypothesis`-style tests.
+
+## FFI
+
+### `rlua`
+
+[`rlua`](https://crates.io/crates/rlua) is a safe binding for Lua.
+
+### `pyo3`
+
+[`pyo3`](https://pyo3.rs/) is a binding for Python. It has an
+associated package ([`maturin`](https://github.com/PyO3/maturin)) for
+building Python packages with Rust code; install with `python -m pip
+install maturin`.

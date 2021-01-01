@@ -135,7 +135,7 @@ TEST(Closures, Mutable) {
         EXPECT_EQ(i, c0());
         EXPECT_EQ(i, c1());
     }
-    // Surprisingly, cloning closures is allowed:
+    // Copying closures is allowed:
     auto c2 = c0;
     EXPECT_EQ(10, c2());
     EXPECT_EQ(11, c2());
