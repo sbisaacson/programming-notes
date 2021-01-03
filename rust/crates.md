@@ -17,6 +17,14 @@ expression engine.
 [`lazy_static`](https://crates.io/crates/lazy_static) allows you to
 initialize static variables at run-time.
 
+## OS and IO
+
+### `memmap`
+
+[`memmap`](https://crates.io/crates/memmap) supports the `mmap(2)`
+system call. In my experience it's better to use `pread` and `pwrite`
+unless absolutely necessary.
+
 ## Parallel programming
 
 ### `rayon`
@@ -103,6 +111,39 @@ some macros.
 
 [`proptest`](https://crates.io/crates/proptest) also allows
 `hypothesis`-style tests, but has fancier strategies.
+
+### `afl`
+
+[`afl`](https://crates.io/crates/afl) is a Rust interface for the
+[American Fuzzy Lop](https://lcamtuf.coredump.cx/afl/) fuzzer. See
+John Regehr's posts on
+[fuzzing](https://blog.regehr.org/archives/1687) and
+[assertions](https://blog.regehr.org/archives/1091).
+
+### `cargo-fuzz`
+
+[`cargo-fuzz`](https://crates.io/crates/cargo-fuzz) is an alternative
+fuzzer.
+
+### `honggfuzz`
+
+[`honggfuzz`](https://crates.io/crates/honggfuzz) is a fuzzer
+developed by Google. It takes some work to set up: you need to install
+
+- `build-essentials`
+- `binutils-dev`
+- `libunwind-dev`
+- `libblocksruntime-dev`
+- `liblzma-dev`
+
+before running `cargo install honggfuzz`.
+
+## Databases
+
+### `rusqlite`
+
+[`rusqlite`](https://crates.io/crates/rusqlite) is a
+[`SQLite`](https://sqlite.org) binding.
 
 ## Logging
 
