@@ -99,6 +99,11 @@ some macros.
 [`quickcheck`](https://crates.io/crates/quickcheck) allows
 `hypothesis`-style tests.
 
+### `proptest`
+
+[`proptest`](https://crates.io/crates/proptest) also allows
+`hypothesis`-style tests, but has fancier strategies.
+
 ## Logging
 
 ### `log`
@@ -130,3 +135,31 @@ for C (and a restricted subset of C++) headers.
 associated package ([`maturin`](https://github.com/PyO3/maturin)) for
 building Python packages with Rust code; install with `python -m pip
 install maturin`.
+
+## Debugging and binary analysis
+
+### `object`
+
+[`object`](https://crates.io/crates/object) is a library for reading
+ELF files.
+
+### `gimli`
+
+[`gimli`](https://crates.io/crates/gimli) is a library for reading
+DWARF debugging data.
+
+### `addr2line`
+
+[`addr2line`](https://crates.io/crates/addr2line) is a library that
+converts instruction addresses to debugging data (using `gimli`).
+
+## Parsing
+
+### `lalrpop`
+
+[`lalrpop`](https://crates.io/crates/lalrpop) is a LALR(1) parser
+generator.
+
+### `nom`
+
+[`nom`](https://crates.io/crates/nom) is a parser combinator library.
