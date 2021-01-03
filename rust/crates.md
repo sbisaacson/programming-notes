@@ -163,3 +163,8 @@ generator.
 ### `nom`
 
 [`nom`](https://crates.io/crates/nom) is a parser combinator library.
+
+### `combine`
+
+[`combine`](https://crates.io/crates/combine) is also a parser
+combinator library.
