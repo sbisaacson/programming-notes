@@ -26,7 +26,7 @@ fn main() {
     }
     // Roughly:
     //
-    //     Cell::from:mut : &mut [T] -> Cell<[T]>
+    //     Cell::from:mut : &mut [T] -> &Cell<[T]>
     //     as_slice_of_cells : &Cell<[T]> -> &[Cell<T>]
     let arr_cell_view = Cell::from_mut(arr).as_slice_of_cells();
     tr(
