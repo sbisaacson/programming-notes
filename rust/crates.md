@@ -23,7 +23,9 @@ initialize static variables at run-time.
 
 [`memmap`](https://crates.io/crates/memmap) supports the `mmap(2)`
 system call. In my experience it's better to use `pread` and `pwrite`
-unless absolutely necessary.
+unless absolutely necessary. Note that the `read_at` and `write_at`
+methods (exposed by the UNIX prelude) take a `&self` receiver, so you
+can share a file among threads.
 
 ## Parallel programming
 
