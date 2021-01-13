@@ -71,10 +71,13 @@ format for `serde`.
 
 [`rug`](https://crates.io/crates/rug) is a GMP wrapper.
 
-### `num-complex`
+### `num`
 
-[`num-complex`](https://crates.io/crates/num-complex) is the standard
-implementation of complex numbers.
+[`num`](https://crates.io/crates/num) has a lot of functionality:
+* Traits for primitive integer types, allowing methods that are
+  generic over `u64`, `u32`, etc.
+* Arithmetic shift methods on unsigned integers (`signed_shr`)
+* Complex numbers
 
 ## Error handling
 
