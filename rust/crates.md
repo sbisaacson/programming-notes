@@ -73,6 +73,14 @@ format for `serde`.
 
 [`rug`](https://crates.io/crates/rug) is a GMP wrapper.
 
+### `ndarray`
+
+[`ndarray`](https://crates.io/crates/ndarray) is a multi-dimensional
+array library (roughly similar to `numpy`). The companion package
+[`ndarray-linalg`](https://crates.io/crates/ndarray-linalg) supports
+BLAS through an external backend (use the `openblas`, `netlib`, or
+`intel-mkl` features when compiling as part of an executable).
+
 ### `num`
 
 [`num`](https://crates.io/crates/num) has a lot of functionality:
