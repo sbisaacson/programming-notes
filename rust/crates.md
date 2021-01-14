@@ -81,7 +81,7 @@ than the standard library.
 
 ### `serde`
 
-[Serde](https://serde.rs) is the standard crate for serialization and
+[`serde`](https://serde.rs) is the standard crate for serialization and
 deserialization. Most crates include serde support as an optional
 feature. It supports zero-copy deserialization for some formats
 (prefer `Cow<'a, str>` to an owned `String`).
@@ -94,7 +94,24 @@ serialization and deserialization for `serde`.
 ### `bincode`
 
 [`bincode`](https://crates.io/crates/bincode) is a compact binary
-format for `serde`.
+format for `serde`. The authors claim that `bincode`-serialized objects
+are no larger than they are in memory.
+
+### `flexbuffers`
+
+[`flexbuffers`](https://crates.io/crates/flexbuffers) is a binary
+format for `serde` developed by Google.
+
+### `yaml-rust`
+
+[`yaml-rust`](https://crates.io/crates/yaml-rust) is a pure Rust
+implementation of [YAML](https://yaml.org). [Avoid YAML](https://github.com/cblp/yaml-sucks)
+unless it is necessary.
+
+### `serde_yaml`
+
+[`serde_yaml`](https://crates.io/crates/serde_yaml) provides glue
+to use YAML as a `serde` format (using `yaml-rust` as the parser).
 
 ## Numerics
 
