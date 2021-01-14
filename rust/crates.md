@@ -2,7 +2,20 @@
 
 Rust crates all live in one giant namespace on
 [`crates.io`](https://crates.io) and don't necessarily have obvious
-names.
+names. 
+
+# Useful links:
+
+* [`lib.rs`](https://lib.rs) is an unofficial curated index of crates.
+* [`crates.io`](https://crates.io) is the official Rust crate registery.
+* [`docs.rs`](https://docs.rs) has searchable documentation for many crates.
+* [Standard library documentation](https://doc.rust-lang.org/std/index.html)
+* [Reference](https://doc.rust-lang.org/reference/index.html)
+* [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) (reference for
+  `unsafe` Rust)
+* [Cargo documentation](https://doc.rust-lang.org/cargo/index.html)
+* [Rustdoc documentation](https://doc.rust-lang.org/rustdoc/index.html)
+* [Rust API guidelines](https://rust-lang.github.io/api-guidelines/about.html)
 
 ## Data structures and general programming
 
@@ -45,6 +58,16 @@ use `std::cmp::Reverse` to wrap items to form a min-heap.
 [`smallvec`](https://crates.io/crates/smallvec) defines a
 `SmallVec<[T; n]>` type that stores up to `n` items within the value
 before making a heap allocation.
+
+### `bumpalo`
+
+[`bumpalo`](https://crates.io/crates/bumpalo) is a bump allocator
+for Rust.
+
+### `jemallocator`
+
+[`jemallocator`](https://crates.io/crates/jemallocator) lets you
+use [`jemalloc`](http://jemalloc.net) in place of the standard allocator.
 
 ## OS and IO
 
@@ -197,6 +220,11 @@ developed by Google. It takes some work to set up: you need to install
 
 before running `cargo install honggfuzz`.
 
+### `criterion`
+
+[`criterion`](https://crates.io/crates/criterion) is a library for
+microbenchmarking.
+
 ## Databases
 
 ### `rusqlite`
@@ -289,6 +317,11 @@ generator.
 combinator library.
 
 ## Async
+
+### `async-std`
+
+[`async-std`](https://crates.io/crates/async-std) is an async
+replacement for some standard library facilities.
 
 ### `tokio`
 
