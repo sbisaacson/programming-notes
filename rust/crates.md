@@ -1,11 +1,25 @@
 # Bookmarks on crates
 
+Rust crates all live in one giant namespace on
+[`crates.io`](https://crates.io) and don't necessarily have obvious
+names.
+
 ## Data structures and general programming
 
 ### `hashbrown`
 
 [`hashbrown`](https://crates.io/crates/hashbrown) is a
-high-performance hash table.
+high-performance hash table. It is now the implementation of
+`std::collections::HashMap`, but note that a `HashMap` uses
+[SipHash](https:://en.wikipedia.org/Siphash), which is very slow.
+Alternative hashes are
+
+- [`ahash`](https://crates.io/crates/ahash), a
+  "non-cryptographic hash" that uses AES-NI on x86
+- [`fxhash`](https://crates.io/crates/fxhash), a fast hash that is not
+  collision-resistant.
+- [`fnv`](https://crates.io/crates/fnv) is a fast hash for short items
+  that is not collision-resistant.
 
 ### `regex`
 
@@ -16,6 +30,21 @@ expression engine.
 
 [`lazy_static`](https://crates.io/crates/lazy_static) allows you to
 initialize static variables at run-time.
+
+### `priority-queue`
+
+[`priority-queue`](https://crates.io/crates/priority-queue) is an
+implementation of priority queues. Unlike
+`std::collections::BinaryHeap`, it allows efficiently changing the
+priority of an item. Both `BinaryHeap` and
+`priority_queue::PriorityQueue` are max-heaps and you are advised to
+use `std::cmp::Reverse` to wrap items to form a min-heap.
+
+### `smallvec`
+
+[`smallvec`](https://crates.io/crates/smallvec) defines a
+`SmallVec<[T; n]>` type that stores up to `n` items within the value
+before making a heap allocation.
 
 ## OS and IO
 
@@ -172,7 +201,26 @@ use.
 [`slog`](https://crates.io/crates/slog) provides structure logging,
 which should eventually be added to `log`.
 
+### `tracing`
+
+[`tracing`](https://crates.io/crates/tracing) facilitates
+instrumenting code with diagnostics. It is part of the `tokio`
+project.
+
+## Date and time handling
+
+### `chrono`
+
+[`chrono`](https://crates.io/crates/chrono) provides date and time
+handling and provides a superset of the
+[`time`](https://crates.io/crates/time) functionality.
+
 ## FFI
+
+### `cc`
+
+[`cc`](https://crates.io/crates/cc) is the standard way to invoke a C
+compiler in a `build.rs` script.
 
 ### `bindgen`
 
@@ -222,3 +270,21 @@ generator.
 
 [`combine`](https://crates.io/crates/combine) is also a parser
 combinator library.
+
+## Async
+
+### `tokio`
+
+[`tokio`](https://crates.io/crates/tokio) is the standard async
+runtime.
+
+### `mio`
+
+[`mio`](https://crates.io/crates/mio), also developed by the `tokio`
+developers, is a low-level library for async network communication.
+
+### `io-uring`
+
+[`io-uring`](https://crates.io/crates/io-uring) is an interface for
+the Linux `io_uring` system calls. It is developed by the `tokio`
+developers.
