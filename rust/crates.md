@@ -69,6 +69,11 @@ for Rust.
 [`jemallocator`](https://crates.io/crates/jemallocator) lets you
 use [`jemalloc`](http://jemalloc.net) in place of the standard allocator.
 
+### `itertools`
+
+[`itertools`](https://crates.io/crates/itertools) is similar to the Python
+library of the same name.
+
 ## OS and IO
 
 ### `memmap`
