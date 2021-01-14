@@ -260,7 +260,7 @@ project.
 handling and provides a superset of the
 [`time`](https://crates.io/crates/time) functionality.
 
-## FFI
+## FFI and Rust development
 
 ### `cc`
 
@@ -282,6 +282,11 @@ for C (and a restricted subset of C++) headers.
 associated package ([`maturin`](https://github.com/PyO3/maturin)) for
 building Python packages with Rust code; install with `python -m pip
 install maturin`.
+
+### `guppy`
+
+[`guppy`](https://crates.io/crates/guppy) is a tool for parsing `cargo
+metadata` output and can be used to make dependency graphs.
 
 ## Debugging and binary analysis
 
