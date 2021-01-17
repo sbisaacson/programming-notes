@@ -141,7 +141,7 @@ unless it is necessary.
 [`serde_yaml`](https://crates.io/crates/serde_yaml) provides glue
 to use YAML as a `serde` format (using `yaml-rust` as the parser).
 
-## Numerics
+## Numerical code
 
 ### `rug`
 
@@ -162,6 +162,11 @@ BLAS through an external backend (use the `openblas`, `netlib`, or
   generic over `u64`, `u32`, etc.
 * Arithmetic shift methods on unsigned integers (`signed_shr`)
 * Complex numbers
+
+### `GSL`
+
+[`GSL`](https://crates.io/crates/GSL) is a binding for the [GNU Scientific
+Library](https://www.gnu.org/software/gsl/).
 
 ## Error handling
 
