@@ -273,9 +273,6 @@ TEST(Functional, PointerToMemberFunction) {
 
 // The rules for references in C++ are very complex. See [3].
 //
-// [3]:
-// https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/
-
 // We could use type_traits here:
 int overloaded(int &x) { return 0; }
 int overloaded(int &&x) { return 1; }
@@ -306,7 +303,8 @@ TEST(References, RvalueVsLvalue) {
 
 } // namespace
 
-// [1]:
-// https://stackoverflow.com/questions/18453145/how-is-stdfunction-implemented
-// [2]:
-// https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md
+// clang-format off
+// [1]: https://stackoverflow.com/questions/18453145/how-is-stdfunction-implemented
+// [2]: https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md
+// [3]: https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/
+// clang-format on
