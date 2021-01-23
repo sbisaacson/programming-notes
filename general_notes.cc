@@ -9,6 +9,8 @@
 #include <ostream>
 #include <sstream>
 #include <string>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include <gsl/span>
@@ -267,6 +269,38 @@ TEST(Functional, PointerToMemberFunction) {
     };
     EXPECT_EQ(230, std::invoke(alt_bound_ptr, 2, 3));
     // As far as I know, you can't just write &obj.f.
+}
+
+// The rules for references in C++ are very complex. See [3].
+//
+// [3]:
+// https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/
+
+// We could use type_traits here:
+int overloaded(int &x) { return 0; }
+int overloaded(int &&x) { return 1; }
+
+template <class T> int call_overloaded_without_forward(T &&x) {
+    // NB. x is an lvalue, even if it has type int &&.  Without using
+    // std::forward, we can't move out of x within a function we
+    // invoke:
+    return overloaded(x);
+}
+
+template <class T> int call_overloaded_with_forward(T &&x) {
+    return overloaded(std::forward<T>(x));
+}
+
+TEST(References, RvalueVsLvalue) {
+    int lvalue = 55;
+#define rvalue 10
+    EXPECT_EQ(0, overloaded(lvalue));
+    EXPECT_EQ(1, overloaded(rvalue));
+    EXPECT_EQ(0, call_overloaded_without_forward(lvalue));
+    EXPECT_EQ(0, call_overloaded_without_forward(rvalue));
+    EXPECT_EQ(0, call_overloaded_with_forward(lvalue));
+    EXPECT_EQ(1, call_overloaded_with_forward(rvalue));
+#undef rvalue
 }
 
 } // namespace
