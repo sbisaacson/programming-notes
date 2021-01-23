@@ -300,6 +300,7 @@ TEST(References, RvalueVsLvalue) {
     EXPECT_EQ(0, call_overloaded_without_forward(rvalue));
     EXPECT_EQ(0, call_overloaded_with_forward(lvalue));
     EXPECT_EQ(1, call_overloaded_with_forward(rvalue));
+    EXPECT_EQ(1, overloaded(std::move(lvalue)));
 #undef rvalue
 }
 
