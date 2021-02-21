@@ -76,6 +76,20 @@ library of the same name.
 
 ## OS and IO
 
+### `libc`
+
+[`libc`](https://crates.io/crates/libc) is the standard binding to
+`libc`. Almost everything is `unsafe`.
+
+### `nix`
+
+[`nix`](https://crates.io/crates/nix) is a high-level `libc` binding.
+
+### `io-uring`
+
+[`io-uring`](https://crates.io/crates/io-uring) is a binding to the Linux
+`io-uring` interface.
+
 ### `memmap`
 
 [`memmap`](https://crates.io/crates/memmap) supports the `mmap(2)`
