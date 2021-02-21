@@ -249,6 +249,16 @@ before running `cargo install honggfuzz`.
 [`criterion`](https://crates.io/crates/criterion) is a library for
 microbenchmarking.
 
+### `bencher`
+
+[`bencher`](https://crates.io/crates/bencher) is a port of libtest to
+stable Rust.
+
+### `benchcmp`
+
+[`benchcmp`](https://crates.io/crates/benchcmp) is a tool for
+comparing the output of two runs of `cargo bench`.
+
 ## Databases
 
 ### `rusqlite`
