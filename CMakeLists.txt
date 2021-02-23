@@ -6,6 +6,9 @@ find_package(TBB REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
+
 # See https://github.com/google/googletest/tree/master/googletest:
 
 configure_file(gtest_CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -39,7 +42,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-add_executable(cxx_notes general_notes.cc tbb_notes.cc ieee754_notes.cc)
+add_executable(cxx_notes general_notes.cc tbb_notes.cc ieee754_notes.cc avx2_notes.cc)
 set_property(TARGET cxx_notes PROPERTY CXX_STANDARD 17)
 target_link_libraries(cxx_notes gtest_main TBB::tbb TBB::tbbmalloc Boost::headers Microsoft.GSL::GSL gmp)
 
