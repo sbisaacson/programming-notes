@@ -5,6 +5,13 @@
 
 namespace {
 
+template <typename To, typename From> To transmute(From x) {
+    static_assert(sizeof(To) == sizeof(From), "size mismatch");
+    To y;
+    memcpy(&y, &x, sizeof(y));
+    return y;
+}
+
 // The unpack intrinsics effect the following transposes:
 //
 //     a.b.cdef -> c.b.defa (epi8)
@@ -64,6 +71,46 @@ TEST(AVX2, Transpose4x4) {
     EXPECT_EQ(0xffffffff, _mm256_movemask_epi8(_mm256_cmpeq_epi64(w1, z1)));
     EXPECT_EQ(0xffffffff, _mm256_movemask_epi8(_mm256_cmpeq_epi64(w2, z2)));
     EXPECT_EQ(0xffffffff, _mm256_movemask_epi8(_mm256_cmpeq_epi64(w3, z3)));
+}
+
+// vfmadd213pd and vfmadd132pd look redundant. In Intel syntax,
+//
+//     vfmadd213pd a, b, c ; sets a := b * a + c
+//     vfmadd132pd a, c, b ; sets a := a * b + c
+//
+// If a and b are both NaN, the first multiplicand argument is
+// propagated.  If one of a and b are NaN, they are propagated over c;
+// otherwise c is propagated.
+// We also have
+//
+//     vfmadd231pd a, b, c ; sets a := b * c + a
+
+__m256d fma213(__m256d a, __m256d b, __m256d c) {
+    asm("vfmadd213pd %[c], %[b], %[a]" : [a] "+x"(a) : [b] "x"(b), [c] "x"(c));
+    return a;
+}
+
+__m256d fma132(__m256d a, __m256d b, __m256d c) {
+    asm("vfmadd132pd %[c], %[b], %[a]" : [a] "+x"(a) : [b] "x"(b), [c] "x"(c));
+    return a;
+}
+
+__m256d fma231(__m256d a, __m256d b, __m256d c) {
+    asm("vfmadd231pd %[c], %[b], %[a]" : [a] "+x"(a) : [b] "x"(b), [c] "x"(c));
+    return a;
+}
+
+TEST(AVX2, FmaNan) {
+    __m256d a = _mm256_setr_pd(transmute<double>(0x7fff800000000001), 0, 0, 0);
+    __m256d b = _mm256_setr_pd(transmute<double>(0x7fff800000000002), 0, 0, 0);
+    __m256d c = _mm256_setr_pd(transmute<double>(0x7fff800000000004), 0, 0, 0);
+    __m256d zero = _mm256_setzero_pd();
+    EXPECT_EQ(transmute<uint64_t>(b[0]),
+              transmute<uint64_t>(fma213(a, b, c)[0]));
+    EXPECT_EQ(transmute<uint64_t>(a[0]),
+              transmute<uint64_t>(fma132(a, c, b)[0]));
+    EXPECT_EQ(transmute<uint64_t>(b[0]),
+              transmute<uint64_t>(fma231(a, b, c)[0]));
 }
 
 } // namespace
