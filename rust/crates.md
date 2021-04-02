@@ -19,6 +19,11 @@ names.
 
 ## Data structures and general programming
 
+### `bytes`
+
+[`bytes`](https://crates.io/crates/bytes) is a crate for reading data
+from and writing data to byte buffers.
+
 ### `hashbrown`
 
 [`hashbrown`](https://crates.io/crates/hashbrown) is a
@@ -154,6 +159,12 @@ unless it is necessary.
 
 [`serde_yaml`](https://crates.io/crates/serde_yaml) provides glue
 to use YAML as a `serde` format (using `yaml-rust` as the parser).
+
+### `protobuf`
+
+[`protobuf`](https://crates.io/crates/protobuf) is a pure Rust
+implementation of [Google
+`protobuf`](https://developers.google.com/protocol-buffers).
 
 ## Numerical code
 
