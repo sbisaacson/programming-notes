@@ -193,6 +193,27 @@ BLAS through an external backend (use the `openblas`, `netlib`, or
 [`GSL`](https://crates.io/crates/GSL) is a binding for the [GNU Scientific
 Library](https://www.gnu.org/software/gsl/).
 
+### `fftw`
+
+[`fftw`](https://crates.io/crates/fftw) is a Rust binding for
+[FFTW](http://www.fftw.org). It has an `intel-mkl` feature for using
+[Intel
+MKL](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/onemkl.html).
+(Similar to `blas` and `lapack`, there is a separate `fftw-src` crate
+for choosing the binding.)
+
+### `blas`
+
+[`blas`](https://crates.io/crates/blas) is a Rust binding for
+`blas`. Use [`blas-src`](https://crates.io/crates/blas-src) to choose
+the binding.
+
+### `lapack`
+
+[`lapack`](https://crates.io/crates/lapack) is a Rust binding for
+`lapack`. Use [`lapack-src`](https://crates.io/crates/lapack-src) to
+choose the binding.
+
 ## Error handling
 
 ### `backtrace`
