@@ -232,11 +232,11 @@ handling more ergonomic.
 
 ## CLI
 
-### `structopt`
+### `clap`
 
-[`structopt`](https://crates.io/crates/structopt) simplifies CLI
-implementation: you just have to decorate an argument structure with
-some macros.
+[`clap`](https://crates.io/crates/clap) is the standard CLI crate; since
+version 3 it allows you to decorate structs to automatically generate
+a parser.
 
 ## Testing
 
