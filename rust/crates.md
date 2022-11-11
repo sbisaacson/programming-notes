@@ -44,10 +44,11 @@ Alternative hashes are
 [`regex`](https://crates.io/crates/regex) is the standard regular
 expression engine.
 
-### `lazy_static`
+### `once_cell`
 
-[`lazy_static`](https://crates.io/crates/lazy_static) allows you to
-initialize static variables at run-time.
+[`once_cell`](https://crates.io/crates/once_cell) is a replacement for
+[`lazy_static`](https://crates.io/crates/lazy_static). It lets you
+lazily initialize static variables (akin to `pthread_once` in C).
 
 ### `priority-queue`
 
@@ -225,10 +226,13 @@ runtime. It's useful for error reporting: include a
 the time the error bubbles up the callchain, you will lose the
 backtrace.
 
-### `snafu`
+### `anyhow` and `thiserror`
 
-[`snafu`](https://crates.io/crates/snafu) is a crate that makes error
-handling more ergonomic.
+[`thiserror`](https://crates.io/crates/thiserror) lets you derive
+`Error` in an ergonomic way and is intended for libraries. Its
+companion (by the same author),
+[`anyhow`](https://crates.io/crates/anyhow), is intended for
+applications.
 
 ## CLI
 
@@ -306,11 +310,6 @@ comparing the output of two runs of `cargo bench`.
 crate. Executables also need a logger implementation;
 [`env_logger`](https://crates.io/crates/env_logger) is what I usually
 use.
-
-### `slog`
-
-[`slog`](https://crates.io/crates/slog) provides structure logging,
-which should eventually be added to `log`.
 
 ### `tracing`
 
